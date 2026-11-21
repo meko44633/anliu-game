@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+<title>暗流｜日常人際推理模擬</title>
+<meta name="description" content="《暗流》是一款以香港職場為背景的心理推理模擬遊戲。提問、查證、保留不確定性，練習真實人際判斷。" />
+<meta name="theme-color" content="#0d1015" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="暗流" />
+<link rel="manifest" href="./manifest.webmanifest" />
+<link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="./icon-192.png" />
+
+<style>
+:root{color-scheme:dark;--bg:#0d1015;--pane:#151922;--pane2:#1b202a;--line:#303642;--soft:#9ba3b2;--txt:#e7eaf0;--muted:#707b8d;--purple:#b6a5f5;--gold:#e0bc85;--teal:#91ceb5;--red:#dfa5a9}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--bg);font:15px/1.72 system-ui,-apple-system,"PingFang HK","Noto Sans TC",sans-serif;color:var(--txt)}button,input,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.42;cursor:not-allowed}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--purple);outline-offset:3px}
+body:before{content:"";position:fixed;top:-180px;right:-120px;width:580px;height:580px;border-radius:50%;background:radial-gradient(circle,rgba(115,92,176,.08),transparent 70%);pointer-events:none}
+.wrapper{max-width:1190px;margin:0 auto;padding:24px 24px 70px}.top{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 0 22px;border-bottom:1px solid var(--line)}.brand{font-family:Georgia,"Noto Serif TC",serif;font-size:29px;letter-spacing:.18em;font-weight:600}.brand small{display:block;color:var(--soft);font:10px/1.4 ui-monospace,monospace;letter-spacing:.34em;margin-top:5px}.topright{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.tag{font-size:11px;border:1px solid #39414c;border-radius:30px;color:var(--soft);padding:5px 11px;letter-spacing:.02em}.tinybtn{background:transparent;border:1px solid var(--line);border-radius:8px;color:var(--soft);padding:6px 11px}.tinybtn:hover{color:var(--txt);border-color:#626878}
+.eyebrow{color:var(--gold);font:12px/1.2 ui-monospace,monospace;letter-spacing:.22em;text-transform:uppercase}.hero{padding:37px 0 24px}.hero h1{font:500 clamp(27px,3.8vw,45px)/1.27 Georgia,"Noto Serif TC",serif;letter-spacing:.025em;margin:12px 0 14px}.desc{max-width:780px;color:var(--soft);font-size:14px;line-height:1.85}.columns{display:grid;grid-template-columns:minmax(290px,385px) minmax(400px,1fr);gap:19px;align-items:start}.card{background:rgba(21,25,34,.97);border:1px solid var(--line);border-radius:15px;padding:21px}.card+.card{margin-top:16px}.sectionhead{font-size:12px;letter-spacing:.15em;color:var(--soft);text-transform:uppercase;display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}.sectionhead strong{color:var(--txt);letter-spacing:0}.facts{display:grid;gap:11px}.fact{border-left:2px solid #59616e;padding-left:13px;font-size:13px;line-height:1.75}.fact time{display:block;color:var(--gold);font:11px ui-monospace,monospace;margin-bottom:3px}.fact em{font-style:normal;color:var(--soft)}.selfnote{background:#22212b;padding:13px 14px;border-radius:10px;font-size:13px;color:#c6c0d9}.people{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.person{background:var(--pane2);padding:10px;border-radius:10px;min-width:0;border:1px solid var(--line)}.avatar{height:30px;width:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#3a334c;color:#dfd1fa;font-weight:bold;font-size:12px;margin-bottom:7px}.person b{font-size:13px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.person span{font-size:11px;color:var(--soft);display:block}.meter{height:3px;background:#333b46;margin-top:9px;overflow:hidden;border-radius:4px}.meter>div{height:100%;background:var(--teal);transition:width .4s}.meter.bad>div{background:var(--red)}
+.tabs{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:20px}.tab{border:1px solid transparent;padding:8px 11px;background:transparent;color:var(--soft);border-radius:9px;font-size:13px}.tab.active{color:#f2edff;background:#322b47;border-color:#665983}.tabpanel{min-height:350px}.tabtitle{margin:0 0 7px;font:500 23px/1.3 Georgia,"Noto Serif TC",serif}.muted{color:var(--soft);font-size:13px;line-height:1.8}.counter{font-variant-numeric:tabular-nums;color:var(--gold)}.actions{display:flex;flex-wrap:wrap;gap:7px;margin:17px 0}.chip{padding:7px 13px;border:1px solid var(--line);border-radius:99px;background:transparent;color:var(--soft);font-size:13px}.chip.on{border-color:#9a86d3;background:#352d4b;color:#f0eaff}.chip:hover,.choice:hover{border-color:#7b7d92}.choices{display:grid;gap:9px;margin-top:13px}.choice{text-align:left;border:1px solid var(--line);background:#1e232e;border-radius:10px;color:var(--txt);padding:13px 14px;font-size:13px;line-height:1.65;transition:background .15s}.choice small{display:block;margin-top:4px;color:var(--soft)}.choice:hover{background:#282c38}.choice .cost{font:11px ui-monospace,monospace;color:var(--gold);float:right;margin-left:10px}.log{border-top:1px solid var(--line);padding-top:16px;margin-top:22px}.entry{margin:12px 0;padding:14px;border-radius:10px;border:1px solid var(--line);font-size:13px}.entry.me{background:#242439;border-color:#49425f;margin-left:10%}.entry.them{background:#1d252b;margin-right:7%}.entry.ev{background:#25221f;border-color:#494037}.speaker{font-size:11px;color:var(--soft);letter-spacing:.04em;margin-bottom:6px}.statement{font-style:normal;white-space:pre-wrap}.labelpill{font-size:10px;border:1px solid #4d5561;color:var(--soft);padding:2px 6px;border-radius:20px;white-space:nowrap}.footerbar{display:flex;align-items:center;gap:10px;justify-content:space-between;margin-top:19px;border-top:1px solid var(--line);padding-top:17px}.primary{background:#b3a0ed;color:#181522;border:1px solid #b3a0ed;border-radius:9px;padding:10px 16px;font-weight:650}.primary:hover{background:#c5b5f9}.outline{color:var(--txt);background:transparent;border:1px solid var(--line);border-radius:9px;padding:9px 14px}.outline:hover{border-color:#9d90bc}.small{font-size:12px}.clues{display:grid;gap:9px;margin-top:14px}.clue{border:1px solid var(--line);border-radius:10px;padding:12px 13px}.clue b{font-size:13px}.clue p{font-size:12px;color:var(--soft);margin:5px 0 0}.clue .kind{display:inline-block;font-size:10px;color:var(--gold);margin-right:8px}.hrows{display:grid;gap:16px;margin:18px 0}.hrow{background:#1c212b;border-radius:12px;padding:13px}.hrow .htitle{display:flex;justify-content:space-between;gap:8px;font-size:13px;font-weight:650}.hrow p{font-size:12px;color:var(--soft);margin:4px 0 9px}.hrow input{width:100%;accent-color:#b5a4ee}.hrow output{font:13px ui-monospace,monospace;color:var(--gold);font-weight:700}.strategy{display:flex;flex-direction:column;gap:8px;margin:12px 0}.optionlabel{display:flex;gap:11px;align-items:flex-start;border:1px solid var(--line);border-radius:10px;padding:11px 13px;background:#1b202a;font-size:13px;cursor:pointer}.optionlabel:has(input:checked){border-color:#9b89d4;background:#28243a}.optionlabel input{margin-top:5px;accent-color:#a998e2}.optionlabel .opsub{display:block;color:var(--soft);font-size:12px;margin-top:3px}.quizitem{margin:14px 0;border-top:1px solid var(--line);padding-top:13px}.quizitem b{font-size:13px}.quizbuttons{display:flex;flex-wrap:wrap;gap:5px;margin-top:8px}.quizbuttons button{border:1px solid var(--line);background:#1c222b;padding:5px 8px;border-radius:7px;color:var(--soft);font-size:11px}.quizbuttons button.on{background:#3a324f;color:#eee7ff;border-color:#9e87cf}.progress{height:5px;background:#29303a;border-radius:10px;overflow:hidden;margin-top:7px}.progress span{display:block;height:100%;background:linear-gradient(to right,#7b6b9e,#c6adf0);transition:width .25s}.result{font-size:49px;line-height:1;color:#e2d3ff;font-family:Georgia,serif;margin:11px 0 10px}.result small{font-size:20px;color:var(--soft)}.scoregrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;margin:17px 0}.scorebox{padding:12px;background:#202631;border-radius:10px}.scorebox b{display:block;font-size:22px;color:var(--gold)}.scorebox span{font-size:11px;color:var(--soft)}.reveal{background:#27242a;border-left:3px solid #b49d77;padding:14px;margin:17px 0;border-radius:0 8px 8px 0;font-size:13px}.reveal p{margin:7px 0;color:var(--soft)}.sample{background:#1c2630;border:1px solid #40505d;padding:14px;border-radius:10px;font-size:13px}.sample strong{color:#a5d4c7}.tips{padding-left:18px;font-size:13px;color:var(--soft)}.tips li{margin:6px 0}.empty{color:var(--muted);padding:20px 0;font-size:13px;text-align:center}.footer{margin-top:26px;font-size:11px;color:#757e8d;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}.hidden{display:none!important}
+@media(max-width:790px){.wrapper{padding:14px 13px 45px}.top{align-items:flex-start}.brand{font-size:24px}.hero{padding:25px 2px 19px}.columns{grid-template-columns:1fr}.card{padding:17px}.people{gap:6px}.person{padding:8px}.tab{padding:8px}.tabpanel{min-height:260px}.entry.me{margin-left:5%}.entry.them{margin-right:4%}.topright .tag:nth-child(2){display:none}}
+</style>
+</head>
+<body>
+<div class="wrapper">
+<header class="top"><div class="brand">暗流 <small>THE UNSAID · SOCIAL REASONING LAB</small></div><div class="topright"><span class="tag">離線運作</span><span class="tag">多重可能真相</span><button class="tinybtn" id="resetTop">重開案件</button></div></header>
+<section class="hero"><div class="eyebrow">CASE 001 · THE PRESENTATION</div><h1>週五簡報，沒有你的名字。</h1><div class="desc">同事用了你整理嘅資料，但客戶簡報封面只寫咗另外兩個人。係刻意忽略？時間壓力？定係你誤解咗封面嘅意思？你有 9 次調查機會。人物唔會因為你問得巧妙就無條件坦白。</div></section>
+<div class="columns"><aside>
+<section class="card"><div class="sectionhead">你確實知道的事 <span class="labelpill">起始證據</span></div><div class="facts"><div class="fact"><time>週二 · 16:40</time>你喺團隊群組分享過一份客戶分析圖，同時寫咗「有需要我可以再改」。</div><div class="fact"><time>週三 · 19:10</time>你更新咗部分數字，貼出新版連結；但冇直接改共享簡報。</div><div class="fact"><time>週四 · 20:08</time>組長 Mandy 喺群組寫：「我整最後一版，今晚趕住交。」</div><div class="fact"><time>週五 · 11:20</time>你睇到客戶版簡報：第 7 頁有你嘅分析圖；封面寫咗 Mandy 同阿哲，冇寫你。</div></div></section>
+<section class="card"><div class="sectionhead">你可能忽略嘅自身因素</div><div class="selfnote">你唔肯定封面寫嘅係「貢獻者」定「主講人」。另外，你週三更新過資料，但冇確認對方有冇看到最新版本。</div></section>
+<section class="card"><div class="sectionhead">人物關係 <span class="labelpill">信任只係模擬變數</span></div><div class="people" id="people"></div></section>
+<section class="card"><div class="sectionhead">調查進度 <span class="counter" id="budget">0 / 9</span></div><div class="progress"><span id="bar" style="width:0"></span></div><p class="muted">每次查證、追問、質問都消耗一次機會。你可以提早作決定。咄咄逼人會令對方更保留，但溫和亦唔保證得到真相。</p></section>
+</aside><main>
+<section class="card"><nav class="tabs" id="tabs"><button class="tab active" data-tab="talk">對話試探</button><button class="tab" data-tab="inspect">獨立查證</button><button class="tab" data-tab="clues">線索簿</button><button class="tab" data-tab="judge">下判斷</button></nav><div id="panel" class="tabpanel"></div></section>
+</main></div>
+<div class="footer"><span>本作所有人物與事件均屬虛構。模擬分數不等於心理診斷、測謊或真實人際預測。</span><span>V1.0 · 純本地 HTML / CSS / JavaScript · 不傳送資料</span></div>
+</div>
+<script>
+'use strict';
+const STORE='the_unsaid_case001_v1';
+const NAMES={mandy:'Mandy',alex:'阿哲',chi:'嘉怡'};
+const PERSONS=[['mandy','組長／對外負責'],['alex','同事／簡報主講'],['chi','行政／會議安排']];
+const WORLD=[
+ {name:'封面由舊範本沿用，主要標示主講人',summary:'客戶版封面喺週二已經有 Mandy 同阿哲嘅名字。之後資料頁有更新，但封面冇重做。客戶會議實際由呢兩人主講；Mandy 喺口頭問答時有提到分析由團隊其他同事協助。即使唔係故意搶功，佢哋亦冇做好貢獻記錄。',subtle:'呢個背景唔代表你嘅不舒服無理，只代表單靠封面無法證明有人存心排擠。'},
+ {name:'趕交件時的取捨，兼有管理上的疏忽',summary:'Mandy 覺得客戶只需要知道兩位負責講解嘅人，因此將封面簡化。佢知道你做咗分析，但喺趕工同顧客溝通壓力下，冇考慮到團隊內部嘅認可問題。阿哲亦冇主動補充。冇充足資料顯示 Mandy 想霸佔功勞，但確實忽略咗你嘅貢獻感受。',subtle:'選擇性省略同故意打壓並唔係同一回事；但當事人仍有責任補救。'},
+ {name:'Mandy 有意突出自己的主導角色',summary:'Mandy 察覺到下月管理層會比較幾個項目負責人嘅表現，所以傾向將成果包裝成自己帶領、阿哲協助。佢冇否認你做過分析，只係冇主動將你放到前台；部分做法有自利動機，但亦可以用客戶會議分工去解釋。呢種情況更需要清楚留痕同私下談分工。',subtle:'即使遊戲後台設定存在自利動機，現實中仍不能單靠一個封面便合理指控。'}
+];
+const Q={
+ mandy:[
+  {id:'m1',text:'「我想確認一下，客戶版封面嘅署名一般代表乜嘢？」',desc:'先問規則，不先假定動機',tone:'neutral',clue:'policy'},
+  {id:'m2',text:'「第七頁用咗我個分析，對外通常會點介紹分工？」',desc:'以具體事實談貢獻',tone:'neutral',clue:'credit'},
+  {id:'m3',text:'「我週三晚更新咗數字，想知有冇增加你哋趕稿嘅麻煩？」',desc:'檢查自己可能造成嘅問題',tone:'self',clue:'lateness'},
+  {id:'m4',text:'「封面冇我個名，係咪代表你覺得我嗰部分貢獻未夠重要？」',desc:'直接詢問自己的處境',tone:'challenge',clue:'accuse'},
+  {id:'m5',text:'「下次同類項目，可唔可以預先講清楚署名同出席安排？」',desc:'討論往後安排',tone:'repair',clue:'next'},
+  {id:'m6',text:'「我睇過文件修改紀錄，內容同封面更新時間唔同，當時邊個負責核對署名？」',desc:'根據文件紀錄追問',tone:'neutral',clue:'historyfollow',requires:'e1'}
+ ],
+ alex:[
+  {id:'a1',text:'「你講封面只寫出席嘅人，係既定規矩，定你自己估？」',desc:'分清陳述與推測',tone:'neutral',clue:'alexguess'},
+  {id:'a2',text:'「當日客人問起第七頁，你哋點樣介紹嗰部分？」',desc:'詢問實際發生嘅說話',tone:'neutral',clue:'meeting'},
+  {id:'a3',text:'「呢次趕稿，你覺得邊一環最難協調？」',desc:'探查時間壓力與責任',tone:'self',clue:'pressure'},
+  {id:'a4',text:'「你有冇感覺 Mandy 對外講嘅分工，同實際做嘅有啲唔同？」',desc:'了解同事觀感',tone:'challenge',clue:'motive'},
+  {id:'a5',text:'「如果我想同 Mandy 講清楚分工，你覺得點講會比較妥當？」',desc:'詢問處理方式',tone:'repair',clue:'advice'},
+  {id:'a6',text:'「我睇過會議紀錄，冇提到做分析嘅人。你記得當時口頭有冇講過？」',desc:'根據紀錄再核實',tone:'neutral',clue:'minutesfollow',requires:'e5'}
+ ],
+ chi:[
+  {id:'c1',text:'「客戶會議嘅出席名單通常點決定？」',desc:'檢查制度性解釋',tone:'neutral',clue:'invite'},
+  {id:'c2',text:'「你知唔知當晚簡報究竟改過啲乜？」',desc:'從旁觀者補充時間線',tone:'neutral',clue:'edit'},
+  {id:'c3',text:'「之前同類客戶版，封面通常寫邊啲人？」',desc:'比較相同情境下嘅慣例',tone:'neutral',clue:'precedent'},
+  {id:'c4',text:'「你同 Mandy 合作咁耐，覺得佢通常重唔重視同事嘅署名？」',desc:'詢問第三方的印象',tone:'challenge',clue:'gossip'},
+  {id:'c5',text:'「我睇過會議邀請，但唔清楚最初點定人選。你記唔記得安排過程？」',desc:'根據邀請核實',tone:'neutral',clue:'invitefollow',requires:'e4'}
+ ]
+};
+const EV=[
+ {id:'e1',title:'查文件修改紀錄',desc:'比較封面與內容頁的修改時間',clue:'history'},
+ {id:'e2',title:'翻查上次客戶簡報',desc:'檢查「封面列主講人」是否慣例',clue:'precedentdoc'},
+ {id:'e3',title:'核對週三群組訊息',desc:'確認自己提供新版資料的方式',clue:'ownmsg'},
+ {id:'e4',title:'查會議邀請與議程',desc:'檢查出席安排及主持人角色',clue:'invitedoc'},
+ {id:'e5',title:'核對客戶會議紀錄',desc:'查有沒有提及資料來源及負責人',clue:'minutes'}
+];
+const CLUE_TEXT={
+ historyfollow:[['Mandy：「你睇得幾仔細。嗰時重點放咗喺內容，封面沿用舊版。我冇安排人專門核對署名。」','Mandy：「PDF 確實係我最後匯出，署名冇另行核對；因為我當時當成主講人名單。」','Mandy：「封面我有睇過，當時係按主講分工保留兩個名。我承認冇事先同你講清楚。」'],'當事人陳述'],
+ minutesfollow:[['阿哲：「我記得佢有提到另一位同事幫忙，但冇直接叫你個名；記錄冇寫係正常嘅。」','阿哲：「我印象中冇特別提做分析嘅人。不過真係唔排除有一句我冇記住。」','阿哲：「Mandy 係講過團隊分析，我冇聽到有點名。嗰時客人主要關心數據結論。」'],'當事人陳述'],
+ invitefollow:[['嘉怡：「起初係 Mandy 定咗兩位講解，加埋客戶代表三個位。其實我冇參與討論應否邀請分析同事。」','嘉怡：「Mandy 畀我個名單係兩個人，我照發。客戶當時想會議精簡，冇問過分析同事可否參與。」','嘉怡：「最初係 Mandy 畀我兩個代表。我冇見到客戶限定人數，但我亦唔知道佢有冇私下同客講過。」'],'當事人陳述'],
+ policy:[['Mandy 說：「封面好多時係寫會同客傾嘢嘅人，但我哋唔係每次都一樣。」','Mandy 說：「以前多數寫主講人。呢次我冇特別諗過要補埋所有做資料嘅人。」','Mandy 說：「封面主要係方便客識邊個負責。但係內部點記功勞，我都認同要清楚啲。」'], '當事人陳述'],
+ credit:[['Mandy 說：「張圖真係你整嘅，我當日講到相關內容有講係團隊分析。」','Mandy 說：「張圖係你處理嘅，嗰時趕交客戶版，冇特別逐一介紹。係我安排得唔夠細。」','Mandy 說：「你嗰頁我知道係你做。客戶場面我集中講項目整體成果，內部我哋可以再對一對分工。」'],'當事人陳述'],
+ lateness:[['Mandy 說：「數字本身冇大問題，係你只貼連結，我哋用咗共享簡報原本個圖。好彩差唔遠。」','Mandy 說：「我睇到你更新，不過當時有三四份檔，最後直接沿用已經排好版嗰份。」','Mandy 說：「嗰晚咁多個版本，確實有啲亂。我唔係淨係話你，但下次最好直接標清楚更新咗乜。」'],'當事人陳述'],
+ accuse:[['Mandy：「唔係咁解，你嗰頁有用。當時我係按講解分工擺名，冇特別諗到你會點理解。」','Mandy：「我唔係話你嘅貢獻唔重要。嗰晚真係趕交件，署名冇逐個核對。」','Mandy：「你嗰份分析我知係有用嘅。對外版我想集中呈現項目負責人，唔係喺度評價你嘅工作。」'],'當事人陳述'],
+ next:[['Mandy：「可以呀，下次交客前列好主講同分析支援，等大家都清楚。」','Mandy：「好，下次我哋早啲定好對外名單，同時內部留返每個人做嘅部分。」','Mandy：「可以先定規則。至於對外點展示，我都要考慮客戶同管理層要求。」'],'當事人陳述'],
+ alexguess:[['阿哲：「講真我係估㗎。因為我同 Mandy 有去，所以我當時咁諗。」','阿哲：「我冇見過正式規矩，純粹因為往次都差唔多。」','阿哲：「我唔敢講係咪固定做法，封面好似通常都只寫出去見客嘅人。」'],'當事人陳述'],
+ meeting:[['阿哲：「客人問數據來源時，Mandy 有講係另一位同事整合，冇直接講你個名。」','阿哲：「嗰頁我哋講得幾快，淨係講結論，好似冇特別提邊個做。」','阿哲：「主要係 Mandy 講，我記得佢有講團隊花咗唔少時間分析，冇逐個點名。」'],'當事人陳述'],
+ pressure:[['阿哲：「我哋到夜晚仲要改表格，最後頁尾格式先執好。我其實都冇望過封面。」','阿哲：「趕係真嘅；客個方向週四下午又改咗，Mandy 叫我先搞掂要講嗰幾頁。」','阿哲：「我哋嗰晚修改好急，Mandy 仲要應付另一個主管嘅追問。佢嗰陣幾緊張。」'],'當事人陳述'],
+ motive:[['阿哲：「我真係唔知佢點諗。你問我，我唔想幫任何人估心。」','阿哲：「你哋之間嘅事我唔太清楚。我唔想做傳話筒。」','阿哲：「佢最近的確好重視呢個項目，但係咪搶功，我講唔到。」'],'當事人陳述'],
+ advice:[['阿哲：「不如問佢下次點記錄分工，咁件事都實際啲。」','阿哲：「我會先講你見到乜，再問封面意思，唔好一嚟就話人針對。」','阿哲：「如果你有貢獻紀錄，講清楚就得。先私下傾會好啲。」'],'當事人陳述'],
+ invite:[['嘉怡：「會議名單原本係 Mandy 畀我，我只負責出邀請。今次客人嗰邊限咗三個位置。」','嘉怡：「我係按 Mandy 提供嘅名單發邀請，佢話客戶想主要由兩個人講解。」','嘉怡：「出席人選係組長定，我冇參與揀人，亦冇見過任何針對你嘅指示。」'],'當事人陳述'],
+ edit:[['嘉怡：「我只見到週四有人大改第七頁，但封面圖片仲係週二同一張。」','嘉怡：「嗰晚改咗好幾次檔名，最後係 Mandy 匯出 PDF。唔肯定每頁邊個改。」','嘉怡：「我見到封面有更新版次日期，其餘修改要睇文件紀錄先知。」'],'當事人陳述'],
+ precedent:[['嘉怡：「以前幾份我睇過嘅，封面多數係寫見客嗰兩三個人，未必列晒分析同事。」','嘉怡：「唔算有標準，有時寫全隊，有時只寫主講人，睇組長習慣。」','嘉怡：「有啲簡報會寫項目負責人，但其他貢獻者通常喺內部紀錄。」'],'當事人陳述'],
+ gossip:[['嘉怡：「我唔清楚喎，大家都忙。你最好直接同佢了解。」','嘉怡：「我唔適合評論呢啲。你如果要核實文件，我可以幫。」','嘉怡：「我唔會估佢個人係點嘅，你哋合作細節我睇唔到。」'],'當事人陳述'],
+ history:[['文件紀錄：封面名字最後修改時間係週二 14:22；第七頁週四 22:05 更新。兩頁版本時間唔一致。','文件紀錄：週四 22:05 改咗第七頁；封面週四 22:16 重新匯出，但姓名欄冇修改歷史。','文件紀錄：週四 22:05 改咗第七頁；封面週四 22:16 修改過排版，姓名欄維持 Mandy、阿哲，冇你個名。'],'可核實紀錄'],
+ precedentdoc:[['上次三份同類簡報，兩份封面只列當日主講人，一份列整個小組。','上次三份同類簡報，一份列主講人，一份列所有參與者，一份冇署名。','上次三份同類簡報，兩份只列主講人，一份連分析支援都列明。'],'可核實紀錄'],
+ ownmsg:[['你週三 19:10 的確貼咗新檔連結，但冇標明要取代簡報第七頁。群組冇人明確確認已更新。','你週三 19:10 貼咗連結同「更新少少數字」，冇標明哪些欄位變更；Mandy 只回覆一個「收到」。','你週三 19:10 貼咗更新連結，Mandy 回覆「我睇睇」；但你冇確認最終客戶版有冇套用。'],'可核實紀錄'],
+ invitedoc:[['會議邀請：Mandy 同阿哲負責講解，另有一個客戶代表。會議室預定三人。','會議邀請：主講人列 Mandy、阿哲，備註「請精簡與會人數」。','會議邀請：Mandy 最初提交兩個公司代表姓名；客戶端並冇明確要求只能兩人出席。'],'可核實紀錄'],
+ minutes:[['會議記錄：「分析由團隊支援完成」，並冇寫出個人姓名；無法證明客戶當時實際聽到甚麼。','會議記錄只整理結論，冇署名，亦冇提及分析製作者。','會議記錄中有 Mandy 一句「團隊做咗幾輪分析」，但冇逐個列出貢獻人。'],'可核實紀錄']
+};
+const HYP=[{name:'流程或範本問題',desc:'封面通常列主講人；你把署名當成貢獻清單。'},{name:'趕工造成的管理疏忽',desc:'並非刻意打壓，但對貢獻記錄不夠在意。'},{name:'有意突出自己，淡化你的貢獻',desc:'對方有職場利益考量，但仍可能以客戶分工解釋。'}];
+const STRAT=[{id:'private',title:'私下核對封面用途，要求以後記錄分工',sub:'直接同組長討論，但其他人未必會知道結果。'},{id:'verify',title:'先記錄文件版本，再觀察下一次署名做法',sub:'避免即時摩擦，但可能延遲處理現有疑問。'},{id:'public',title:'在團隊群組貼出客戶版，請組長統一署名標準',sub:'公開處理，其他同事亦可以參與討論。'},{id:'silence',title:'今次先唔追問，下次開項目時再談分工安排',sub:'將即時衝突同未來合作分開處理。'}];
+const QUIZ=[
+ {q:'「客戶版第七頁有我提供嘅分析圖。」',a:'fact'},
+ {q:'「阿哲話：『我估只係寫出席嘅人。』」',a:'statement'},
+ {q:'「由於封面冇我個名，因此 Mandy 一定想壓低我嘅貢獻。」',a:'guess'},
+ {q:'「Mandy 可能因為趕工而忽略署名，但仍需要其他證據。」',a:'inference'}
+];
+const QUIZ_LABELS={fact:'可核實事實',statement:'當事人陳述',inference:'有條件的推論',guess:'證據不足的斷言'};
+function randomWorld(){return Math.floor(Math.random()*3)}
+function defaults(){return {world:randomWorld(),tab:'talk',selected:'mandy',spent:0,relations:{mandy:62,alex:66,chi:72},asked:[],inspected:[],clues:[],log:[],prob:[34,33,33],strategy:'private',quiz:{},done:false,scores:null}}
+function load(){try{const x=JSON.parse(localStorage.getItem(STORE));if(x&&Number.isInteger(x.world)&&x.world>=0&&x.world<=2&&Array.isArray(x.clues)&&x.relations)return {...defaults(),...x}}catch(e){}return defaults()}
+let state=load();function save(){try{localStorage.setItem(STORE,JSON.stringify(state))}catch(e){}}
+const $=sel=>document.querySelector(sel); const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function addClue(id,title,kind,body){if(!state.clues.find(x=>x.id===id))state.clues.push({id,title,kind,body});}
+function addLog(who,text,cls){state.log.push({who,text,cls,turn:state.spent});}
+function answer(id){const c=CLUE_TEXT[id];return c?c[0][state.world]:''}
+function spend(){state.spent=Math.min(9,state.spent+1);}
+function ask(pid,id){if(state.done||state.spent>=9||state.asked.includes(id))return;let q=Q[pid].find(x=>x.id===id);if(!q||q.requires&&!state.inspected.includes(q.requires))return;
+ const person=NAMES[pid];spend();state.asked.push(id);addLog('你 → '+person,q.text,'me');
+ let response=answer(q.clue);
+ if(q.tone==='challenge'){state.relations[pid]=Math.max(20,state.relations[pid]-7);response+='\n（語氣有少少繃緊，但對方仍然願意談具體事情。）'}
+ else if(q.tone==='self'||q.tone==='repair'){state.relations[pid]=Math.min(90,state.relations[pid]+4)}
+ else{state.relations[pid]=Math.min(90,state.relations[pid]+1)}
+ if(state.relations[pid]<42 && q.tone!=='challenge'){response='對方語氣有啲保留：「呢件事我之前已經講咗我知道嗰部分。你想問具體細節，我可以再睇文件，但唔想隨便評論人。」'}
+ addLog(person,response,'them');addClue(id,person+'：'+q.text,CLUE_TEXT[q.clue][1],response);save();render();
+}
+function inspect(id){if(state.done||state.spent>=9||state.inspected.includes(id))return;const e=EV.find(x=>x.id===id);if(!e)return;spend();state.inspected.push(id);let response=answer(e.clue);addLog('查證結果 · '+e.title,response,'ev');addClue(id,e.title,CLUE_TEXT[e.clue][1],response);save();render()}
+function setTab(t){state.tab=t;save();render()}
+function changeProb(idx,value){let p=state.prob.slice();const nv=Number(value),other=[0,1,2].filter(i=>i!==idx),total=p[other[0]]+p[other[1]],remain=100-nv;
+ let first=total>0?Math.round(remain*p[other[0]]/total):Math.round(remain/2);p[idx]=nv;p[other[0]]=first;p[other[1]]=remain-first;state.prob=p;save();document.querySelectorAll('[data-prob]').forEach((slider,i)=>{slider.value=state.prob[i];slider.closest('.hrow').querySelector('output').textContent=state.prob[i]+'%'});}
+function setQuiz(i,val){state.quiz[i]=val;save();renderPanel()}
+function finish(){if(state.done)return;const p=state.prob.map(x=>x/100),w=state.world;
+ const brier=p.reduce((a,v,i)=>a+Math.pow(v-(i===w?1:0),2),0)/2;
+ const confidence=Math.max(0,Math.min(6,Math.round(6*(1-brier))));
+ const n=state.asked.length,evn=state.inspected.length,neutral=state.asked.filter(id=>{let q=Object.values(Q).flat().find(x=>x.id===id);return q&&q.tone!=='challenge'}).length;
+ const research=Math.min(6,Math.round(Math.min(3,evn)*1.05+Math.min(4,neutral)*.63+(n>=4&&evn>=2?.6:0)));
+ const correct=QUIZ.filter((x,i)=>state.quiz[i]===x.a).length;
+ const categories=correct;
+ const stratmap={private:[4,4,4],verify:[3,3,3],public:[2,2,1],silence:[2,2,1]};let strategy=stratmap[state.strategy][w];
+ if(state.asked.filter(id=>['m4','a4','c4'].includes(id)).length>=2)strategy=Math.max(0,strategy-1);
+ state.scores={research,confidence,categories,strategy,total:research+confidence+categories+strategy};state.done=true;state.tab='result';save();render()}
+function renderPeople(){$('#people').innerHTML=PERSONS.map(([id,role])=>`<div class="person"><div class="avatar">${id==='mandy'?'M':id==='alex'?'哲':'怡'}</div><b>${NAMES[id]}</b><span>${role}</span><div class="meter ${state.relations[id]<45?'bad':''}"><div style="width:${state.relations[id]}%"></div></div></div>`).join('')}
+function render(){renderPeople();$('#budget').textContent=`${state.spent} / 9`;$('#bar').style.width=(state.spent/9*100)+'%';$('#tabs').innerHTML=[['talk','對話試探'],['inspect','獨立查證'],['clues','線索簿'],['judge','下判斷']].map(([k,n])=>`<button class="tab ${state.tab===k||state.tab==='result'&&k==='judge'?'active':''}" data-tab="${k}" ${state.done&&k!=='judge'?'disabled':''}>${n}</button>`).join('');renderPanel()}
+function renderPanel(){let html='';const exhausted=state.spent>=9;if(state.done){html=resultHTML()}else if(state.tab==='talk'){
+ html=`<h2 class="tabtitle">你想同邊個傾？</h2><p class="muted">每個問題都可能提供資訊，同時影響關係。對方講嘅係自己知道或願意講嘅部分，唔一定等於事件全貌。</p><div class="actions">${PERSONS.map(([id])=>`<button class="chip ${state.selected===id?'on':''}" data-person="${id}">${NAMES[id]}</button>`).join('')}</div><div class="choices">${Q[state.selected].filter(q=>!q.requires||state.inspected.includes(q.requires)).map(q=>`<button class="choice" data-ask="${state.selected}|${q.id}" ${exhausted||state.asked.includes(q.id)?'disabled':''}><span class="cost">${state.asked.includes(q.id)?'已問過':'−1 次'}</span>${esc(q.text)}</button>`).join('')}</div>`;
+ }else if(state.tab==='inspect'){
+ html=`<h2 class="tabtitle">查證，唔係單靠猜</h2><p class="muted">有啲資料比詢問動機更有辨識力；但文件只會證明發生過乜，未必證明對方點諗。</p><div class="choices">${EV.map(e=>`<button class="choice" data-inspect="${e.id}" ${exhausted||state.inspected.includes(e.id)?'disabled':''}><span class="cost">${state.inspected.includes(e.id)?'已查證':'−1 次'}</span>${esc(e.title)}<small>${esc(e.desc)}</small></button>`).join('')}</div>`;
+ }else if(state.tab==='clues'){
+ html=`<h2 class="tabtitle">線索簿</h2><p class="muted">留意來源：有紀錄嘅事件、當事人自己講嘅說法，具有唔同證據強度。</p><div class="clues">${state.clues.length?state.clues.map(c=>`<div class="clue"><span class="kind">${esc(c.kind)}</span><b>${esc(c.title)}</b><p>${esc(c.body)}</p></div>`).join(''):'<div class="empty">你未收集任何新線索。起始事實已列喺左邊。</div>'}</div>`;
+ }else{html=judgeHTML()}
+ if(state.tab==='talk'||state.tab==='inspect')html+=`<div class="log"><div class="sectionhead">調查紀錄 <span>${state.log.length} 條</span></div>${state.log.length?state.log.slice().reverse().map(x=>`<div class="entry ${x.cls}"><div class="speaker">${esc(x.who)} · 第 ${x.turn} 次行動</div><div class="statement">${esc(x.text)}</div></div>`).join(''):'<div class="empty">開始提問，對話會記錄喺呢度。</div>'}</div>`;
+ if(state.tab!=='result'&&!state.done)html+=`<div class="footerbar"><span class="muted small">${exhausted?'調查次數已用完。':`尚餘 ${9-state.spent} 次行動；可以提早作判斷。`}</span><button class="outline small" data-go-judge>進入判斷 →</button></div>`;
+ $('#panel').innerHTML=html;
+}
+function judgeHTML(){const count=Object.keys(state.quiz).length;return `<h2 class="tabtitle">你有幾肯定？</h2><p class="muted">唔好只揀「一個真相」。為三個互相競爭嘅解釋分配機率，總和必須係 100%。你可以保留不確定性。</p><div class="hrows">${HYP.map((h,i)=>`<div class="hrow"><div class="htitle">${esc(h.name)} <output>${state.prob[i]}%</output></div><p>${esc(h.desc)}</p><input aria-label="${esc(h.name)}的機率" type="range" min="0" max="100" step="1" value="${state.prob[i]}" data-prob="${i}"></div>`).join('')}</div><h3 style="font-size:15px;margin:25px 0 6px">你會點樣處理？</h3><p class="muted">考慮短期情緒滿足，同長期合作、聲譽同工作成果之間嘅取捨。</p><div class="strategy">${STRAT.map(s=>`<label class="optionlabel"><input type="radio" name="strategy" value="${s.id}" ${state.strategy===s.id?'checked':''}><span><b>${s.title}</b><span class="opsub">${s.sub}</span></span></label>`).join('')}</div><h3 style="font-size:15px;margin:25px 0 6px">識別論述性質</h3><p class="muted">同一句話可能包含事實同推測；呢度請選最貼近整句嘅分類。</p>${QUIZ.map((x,i)=>`<div class="quizitem"><b>${i+1}. ${esc(x.q)}</b><div class="quizbuttons">${Object.keys(QUIZ_LABELS).map(key=>`<button data-quiz="${i}|${key}" class="${state.quiz[i]===key?'on':''}">${QUIZ_LABELS[key]}</button>`).join('')}</div></div>`).join('')}<div class="footerbar"><span class="muted small">已完成 ${count}/4 個證據分類</span><button class="primary" data-finish ${count!==4?'disabled':''}>提交判斷 · 20 分制</button></div>`}
+function resultHTML(){const s=state.scores;const w=state.world;const top=state.prob.indexOf(Math.max(...state.prob));return `<div class="eyebrow">CASE REVIEW · 事後檢討</div><h2 class="tabtitle" style="margin-top:13px">你嘅判斷品質</h2><div class="result">${s.total}<small> / 20</small></div><p class="muted">呢個係規則式練習評分，唔係 AI 對人格或智力嘅診斷。後台背景喺每局開始時隨機設定，但你唔應該假定現實一定有單一可揭露的真相。</p><div class="scoregrid"><div class="scorebox"><b>${s.research} / 6</b><span>蒐證與不依賴單一說法</span></div><div class="scorebox"><b>${s.confidence} / 6</b><span>機率校準（含過度自信懲罰）</span></div><div class="scorebox"><b>${s.categories} / 4</b><span>事實、陳述、推論分類</span></div><div class="scorebox"><b>${s.strategy} / 4</b><span>風險與合作分寸</span></div></div><div class="reveal"><b style="color:var(--gold)">本局預設的隱藏背景：</b><p style="color:var(--txt)">${WORLD[w].name}</p><p>${WORLD[w].summary}</p><p>${WORLD[w].subtle}</p></div><div class="clue"><b>你最後分配嘅機率</b><p>${HYP.map((h,i)=>`${h.name}：${state.prob[i]}%${i===w?'（本局背景）':''}`).join('　／　')}</p></div><h3 style="font-size:15px;margin:21px 0 9px">你應該留意嘅陷阱</h3><ul class="tips"><li>封面冇署名係可觀察事實；「對方想搶功」係需要證據支持嘅動機推論。</li><li>即使有人有自利動機，亦唔代表每個行為都出於惡意；即使冇惡意，亦唔代表安排合理。</li><li>最有價值嘅新資訊通常係「能區分假設」嘅文件或具體說話，而唔係更多人格猜測。</li><li>若你自己更新資料時冇清楚交代，亦可能令之後嘅溝通出現合理摩擦。</li></ul><div class="sample"><strong>可用嘅廣東話示範</strong><div style="margin-top:7px">「Mandy，我睇咗客戶版，見到第七頁用咗我整理嘅分析，但封面只列咗你同阿哲。我想了解下，封面係寫主講人定項目貢獻者？如果主要係主講人，我明白。咁下次可唔可以喺內部紀錄列返各人負責嘅部分，方便之後跟進？」</div></div><div class="footerbar" style="flex-wrap:wrap"><button class="outline" data-copy>複製本局紀錄</button><button class="primary" data-reset>再玩一局 · 背景可能不同</button></div>`}
+function exportText(){return `《暗流》模擬紀錄\n本局評分：${state.scores?.total??'未評核'}/20\n\n起始事實：週二分享分析圖、週三貼新版連結、週四 Mandy 整最後版、週五客戶版第七頁使用我的圖但封面無我姓名。\n\n調查：\n${state.log.map(x=>`- ${x.who}：${x.text}`).join('\n')}\n\n我的機率判斷：${HYP.map((x,i)=>x.name+state.prob[i]+'%').join('、')}\n選擇的策略：${STRAT.find(x=>x.id===state.strategy)?.title}\n\n請以20分制嚴格分析我的取證偏誤、推理漏洞及人際處理方法。`}
+async function copy(){const str=exportText();try{await navigator.clipboard.writeText(str);alert('已複製。可以貼到 ChatGPT，要求更深度評核。')}catch(e){const t=document.createElement('textarea');t.value=str;t.style.width='100%';t.rows=8;$('#panel').appendChild(t);t.focus();t.select();alert('瀏覽器未允許自動複製。已選取下方內容，請手動複製。')}}
+function reset(){if(!confirm('確定重開？本局進度會清除，下一局隱藏背景會重新抽取。'))return;state=defaults();save();render()}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-tab],[data-person],[data-ask],[data-inspect],[data-go-judge],[data-quiz],[data-finish],[data-copy],[data-reset]');if(!b)return;
+ if(b.dataset.tab)setTab(state.done?'result':b.dataset.tab);else if(b.dataset.person){state.selected=b.dataset.person;save();renderPanel()}else if(b.dataset.ask){let [p,id]=b.dataset.ask.split('|');ask(p,id)}else if(b.dataset.inspect)inspect(b.dataset.inspect);else if(b.hasAttribute('data-go-judge'))setTab('judge');else if(b.dataset.quiz){let [i,key]=b.dataset.quiz.split('|');setQuiz(Number(i),key)}else if(b.hasAttribute('data-finish'))finish();else if(b.hasAttribute('data-copy'))copy();else if(b.hasAttribute('data-reset'))reset();});
+document.addEventListener('input',e=>{if(e.target.dataset.prob!==undefined)changeProb(Number(e.target.dataset.prob),Number(e.target.value))});
+document.addEventListener('change',e=>{if(e.target.name==='strategy'){state.strategy=e.target.value;save()}});
+$('#resetTop').addEventListener('click',reset);
+render();
+</script>
+<script>
+// GitHub Pages 是 HTTPS；首次開啟後，網站會儲存基本離線檔案。
+if ('serviceWorker' in navigator && location.protocol === 'https:') {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').catch(() => {});
+  });
+}
+</script>
+</body></html>
